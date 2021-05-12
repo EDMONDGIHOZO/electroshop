@@ -7,7 +7,7 @@ router.get(`/`, async (request, response) => {
   response.send({ message: "success", data: products });
 });
 
-router.post(`/products`, (req, res) => {
+router.post(`/`, (req, res) => {
   const product = new Product({
     name: req.body.name,
     image: req.body.image,
