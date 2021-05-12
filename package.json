@@ -1,0 +1,19 @@
+{
+  "name": "electroshop",
+  "version": "1.0.0",
+  "description": "electronic shop for electronic devices in kigali rwanda",
+  "main": "App.js",
+  "repository": "https://github.com/EDMONDGIHOZO/electroshop.git",
+  "author": "EDMONDGIHOZO <gihozoedmond@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon App.js"
+  },
+  "dependencies": {
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.8",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.7"
+  }
+}
