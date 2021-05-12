@@ -2,12 +2,14 @@ const { Category } = require("../models/Category");
 const express = require("express");
 const router = express.Router();
 
+// ========== show all categories available ================= //
 router.get(`/`, async (req, res) => {
   const categories = await Category.find();
   if (categories) res.send({ success: true, data: categories });
   res.send(500).json({ message: "no data " });
 });
 
+// ========== created the category ================= //
 router.post(`/`, async (request, response) => {
   const category = new Category({
     name: request.body.name,
@@ -28,6 +30,15 @@ router.post(`/`, async (request, response) => {
     });
 });
 
+// ========== show single category ================= //
+
+router.get(`/:id`, async (req, res) => {
+  const category = await Category.findById(req.params.id);
+  if (category) res.status(200).json({ data: category });
+  res.status(404).json({ message: "no data found" });
+});
+
+// ========== destroy the category ================= //
 router.delete(`/:id`, (request, response) => {
   Category.findByIdAndRemove(request.params.id)
     .then((cat) => {
