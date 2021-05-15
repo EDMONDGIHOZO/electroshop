@@ -22,6 +22,7 @@ Mongoose.connect(process.env.MONGO_CON, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   dbName: process.env.DB_NAME,
+  useFindAndModify: false,
 })
   .then(() => {
     console.log(`connection is successfully established`);

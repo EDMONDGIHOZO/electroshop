@@ -38,6 +38,26 @@ router.get(`/:id`, async (req, res) => {
   res.status(404).json({ message: "no data found" });
 });
 
+// ========== update the category ================= //
+
+router.put("/:id", async (req, res) => {
+  const category = await Category.findByIdAndUpdate(
+    req.params.id,
+    {
+      name: req.body.name,
+      icon: req.body.icon,
+      color: req.body.color,
+    },
+    { new: true }
+  );
+
+  if (category) {
+    res.send(category);
+  } else {
+    res.status(400).send("category can not be updated");
+  }
+});
+
 // ========== destroy the category ================= //
 router.delete(`/:id`, (request, response) => {
   Category.findByIdAndRemove(request.params.id)
