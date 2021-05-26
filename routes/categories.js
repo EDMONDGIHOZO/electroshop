@@ -5,7 +5,7 @@ const router = express.Router();
 // ========== show all categories available ================= //
 router.get(`/`, async (req, res) => {
   const categories = await Category.find();
-  if (categories) res.send({ success: true, data: categories });
+  if (categories) res.status(200).json({ success: true, data: categories });
   res.send(500).json({ message: "no data " });
 });
 
@@ -20,7 +20,7 @@ router.post(`/`, async (request, response) => {
   await category
     .save()
     .then((newCategory) => {
-      response.send(200).json({
+      response.status(200).json({
         message: "saved",
         data: newCategory,
       });

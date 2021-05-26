@@ -10,6 +10,7 @@ const categoriesRouter = require("./routes/categories");
 const usersRouter = require("./routes/users");
 const authJwt = require("./helpers/jwt");
 const errorHandler = require("./helpers/error-handler");
+const multer = require("multer");
 
 // initialize the express engine
 const App = Express();
@@ -21,6 +22,18 @@ App.use(Express.json());
 App.use(Morgan("tiny"));
 App.use(authJwt());
 App.use(errorHandler);
+App.use("/public/uploads", Express.static(__dirname + "/public/uploads"));
+
+// file upload
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/uploads");
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, file.filename + "-" + uniqueSuffix);
+  },
+});
 
 // connect to database
 Mongoose.connect(process.env.MONGO_CON, {

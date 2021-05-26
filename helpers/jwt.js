@@ -9,6 +9,7 @@ authJwt = () => {
   }).unless({
     path: [
       { url: /\/products(.*)/, methods: ["GET", "OPTIONS"] },
+      { url: /\/public\/uploads(.*)/, methods: ["GET", "OPTIONS"] },
       { url: /\/categories(.*)/, methods: ["GET", "OPTIONS"] },
       "/users/login",
       "/users/register",
@@ -17,7 +18,7 @@ authJwt = () => {
 };
 
 revoker = async (req, payload, done) => {
-  if (!payload.isAdmin) {
+  if (payload.isAdmin) {
     done(null, true);
   } else {
     done();
